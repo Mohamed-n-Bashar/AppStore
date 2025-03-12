@@ -59,3 +59,25 @@ email()async{
     print(e.toString());
   }
 }
+
+website()async{
+  try {
+    final Uri uri = Uri.parse("https://null-tech.netlify.app/");
+    if(await canLaunchUrl(uri)){
+      await launchUrl(uri);
+    }
+  } catch (e) {
+    print(e.toString());
+  }
+}
+
+github()async{
+  try {
+    final Uri uri = Uri.parse("https://github.com/Mohamed-n-Bashar/AppStore/");
+    if(await canLaunchUrl(uri)){
+      await launchUrl(uri);
+    }
+  } catch (e) {
+    print(e.toString());
+  }
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:null_company/screens/erad.dart';
-import 'package:null_company/screens/linkat.dart';
+import 'package:null_company/global/page_one_info.dart';
+import 'package:null_company/global/page_two_info.dart';
 import 'package:null_company/url_launcher.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -9,35 +9,6 @@ class MyHomePage extends StatelessWidget {
 
 
   final ScrollController _scrollController = ScrollController();
-
-//=======================================================================================================functions
-  void _scrollToBottom() {
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent, // الانتقال لنهاية الصفحة
-      duration: const Duration(milliseconds: 500), // مدة الحركة
-      curve: Curves.easeInOut, // سلاسة التمرير
-    );
-  }
-//   Widget _buildResponsiveButton(String text, VoidCallback onPressed, BuildContext context) {
-//   double buttonWidth = MediaQuery.of(context).size.width * 0.45; // 45% من عرض الشاشة
-//   double buttonHeight = MediaQuery.of(context).size.width * 0.12; // 12% من عرض الشاشة
-  
-//   return TextButton(
-//     style: ButtonStyle(
-//       backgroundColor: WidgetStatePropertyAll(Colors.white),
-//       minimumSize: WidgetStatePropertyAll(Size(buttonWidth.clamp(150, 200), buttonHeight.clamp(50, 60))), 
-//       shape: WidgetStatePropertyAll(
-//         RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-//       ),
-//     ),
-//     onPressed: onPressed,
-//     child: Text(
-//       text,
-//       style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
-//     ),
-//   );
-// }
-//=======================================================================================================functions
   
   @override
   Widget build(BuildContext context) {
@@ -92,19 +63,19 @@ class MyHomePage extends StatelessWidget {
                                       )), // عرض 200 وطول 60
                                     shape: WidgetStatePropertyAll(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10), // تدوير الحواف بالكامل
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
                                   ),
                                   onPressed: () {
                                     _scrollController.animateTo(
-                                      _scrollController.offset + MediaQuery.of(context).size.height, // التحرك لمسافة معينة
+                                      _scrollController.offset + MediaQuery.of(context).size.height,
                                       duration: const Duration(milliseconds: 500),
                                       curve: Curves.easeInOut,
                                     );
                                   },
                                   child: const Text(
-                                    "Our Products",
+                                    "My Products",
                                     style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -116,17 +87,24 @@ class MyHomePage extends StatelessWidget {
                                       Size(
                                         MediaQuery.of(context).size.width * 0.35,
                                         MediaQuery.of(context).size.height * 0.06,
-                                      )), // عرض 200 وطول 60
+                                      )),
                                     shape: WidgetStatePropertyAll(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10), // تدوير الحواف بالكامل
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                     ),
                                   ),
-                                  onPressed: _scrollToBottom,
-                                  child: const Text(
-                                    " Follow Us ",
-                                    style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                                  onPressed: (){
+                                    github();
+                                  },
+                                  child: const Row(
+                                    children: [
+                                      FaIcon(FontAwesomeIcons.github, color: Colors.black,),
+                                      Text(
+                                        "  Website ",
+                                        style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 ],
@@ -137,7 +115,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
         
-                      // Section 2 (Contact Us Form)
+                      // Section 2 
                       Container(
                         // height: 900,
                         width: double.infinity,
@@ -146,53 +124,53 @@ class MyHomePage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
                           child: Column(
                             children: [
-                              Text("Our Products", style: TextStyle( color: Colors.black, fontSize: MediaQuery.of(context).size.width * 0.08 , fontWeight: FontWeight.w900, fontFamily: "web" ,height: 1.2), textAlign: TextAlign.center,),
+                              Text("MY Products", style: TextStyle( color: Colors.black, fontSize: MediaQuery.of(context).size.width * 0.08 , fontWeight: FontWeight.w900, fontFamily: "web" ,height: 1.2), textAlign: TextAlign.center,),
                               SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/Erad');
+                                    Navigator.pushNamed(context, '/page_two');
                                   },
                                   child: Column(
                                     children: [
                                       Container(
-                                        width: MediaQuery.of(context).size.shortestSide * 0.3, // العرض
+                                        width: MediaQuery.of(context).size.shortestSide * 0.3,
                                         height: MediaQuery.of(context).size.shortestSide * 0.3,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20), // تدوير الحواف
+                                          borderRadius: BorderRadius.circular(20),
                                           image: const DecorationImage(
-                                            image: AssetImage("assets/images/frontlogo.jpg"), // استبدلها بمسار صورتك
-                                            fit: BoxFit.cover, // لجعل الصورة تغطي الخلفية بالكامل
+                                            image: AssetImage(appTwoLogo),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
                                       const SizedBox(height: 5),
-                                      Text("إيراد", style: TextStyle( color: Colors.black, fontSize: MediaQuery.of(context).size.width * 0.05 , fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
+                                      Text(appTwoName, style: TextStyle( color: Colors.black, fontSize: MediaQuery.of(context).size.width * 0.05 , fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
                                     ],
                                   ),
                                 ),
                                 SizedBox(width: MediaQuery.of(context).size.width * 0.08),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/LinKat');
+                                    Navigator.pushNamed(context, '/page_one');
                                   },
                                   child: Column(
                                     children: [
                                       Container(
-                                        width: MediaQuery.of(context).size.shortestSide * 0.3, // استخدام أقصر جانب لضمان التناسب
-                                        height: MediaQuery.of(context).size.shortestSide * 0.3, // نفس القيمة لجعلها مربعةلارتفاع
+                                        width: MediaQuery.of(context).size.shortestSide * 0.3,
+                                        height: MediaQuery.of(context).size.shortestSide * 0.3,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20), // تدوير الحواف
+                                          borderRadius: BorderRadius.circular(20),
                                           image: const DecorationImage(
-                                            image: AssetImage("assets/images/LinKat_LOGO.png"), // استبدلها بمسار صورتك
-                                            fit: BoxFit.cover, // لجعل الصورة تغطي الخلفية بالكامل
+                                            image: AssetImage(appLogo),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
                                       const SizedBox(height: 5),
-                                      Text("LinKat", style: TextStyle( color: Colors.black, fontSize: MediaQuery.of(context).size.width * 0.05 , fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
+                                      Text(appName, style: TextStyle( color: Colors.black, fontSize: MediaQuery.of(context).size.width * 0.05 , fontWeight: FontWeight.w900), textAlign: TextAlign.center,)
                                 
                                     ],
                                   ),
@@ -209,7 +187,7 @@ class MyHomePage extends StatelessWidget {
                         width: double.infinity,
                         height: 70,
                         child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center, // توسيط العناصر
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   IconButton(
                                     icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.black, size: 25),
@@ -217,7 +195,7 @@ class MyHomePage extends StatelessWidget {
                                       facebook();
                                     },
                                   ),
-                                  const SizedBox(width: 5), // مسافة بين الأيقونات
+                                  const SizedBox(width: 5),
                                   IconButton(
                                     icon: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.black, size: 25),
                                     onPressed: () {
@@ -238,6 +216,13 @@ class MyHomePage extends StatelessWidget {
                                       email();
                                     },
                                   ),
+                                  const SizedBox(width: 5),
+                                  IconButton(
+                                    icon: const FaIcon(FontAwesomeIcons.globe, color: Colors.black, size: 25),
+                                    onPressed: () {
+                                      website();
+                                    },
+                                  ),
                                 ],
                               ),
                       )
@@ -254,7 +239,7 @@ class MyHomePage extends StatelessWidget {
                 Expanded(
                   flex: 10,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
@@ -272,7 +257,7 @@ class MyHomePage extends StatelessWidget {
                 ),
                 const Spacer(flex: 1,),
                 Row(
-                                mainAxisAlignment: MainAxisAlignment.center, // توسيط العناصر
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   IconButton(
                                     icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.white, size: 25),
@@ -280,7 +265,7 @@ class MyHomePage extends StatelessWidget {
                                       facebook();
                                     },
                                   ),
-                                  const SizedBox(width: 5), // مسافة بين الأيقونات
+                                  const SizedBox(width: 5),
                                   IconButton(
                                     icon: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.white, size: 25),
                                     onPressed: () {
@@ -306,7 +291,7 @@ class MyHomePage extends StatelessWidget {
                               const SizedBox(height: 20,)
               ],
             ),
-          ); // هنا تستبدلها بصفحة الموقع الأساسية للموبايل
+          );
         },
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:null_company/screens/MyHomePage.dart';
-import 'package:null_company/screens/erad.dart';
-import 'package:null_company/screens/linkat.dart';
+import 'package:null_company/screens/page_two.dart';
+import 'package:null_company/screens/page_one.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
-        '/LinKat': (context) => linkat(),
-        '/Erad': (context) => Erad(),
+        '/page_one': (context) => page_one(),
+        '/page_two': (context) => page_two(),
       },
 
       debugShowCheckedModeBanner: false,

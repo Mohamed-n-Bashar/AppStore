@@ -1,86 +1,25 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:null_company/global/page_one_info.dart';
+import 'package:null_company/global/page_two_info.dart';
 import 'package:null_company/url_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Erad extends StatelessWidget {
-  Erad({super.key});
-
-final ScrollController _scrollController = ScrollController();
-    final List<String> imagePaths = [
-    'assets/images/erad/s1.png',
-    'assets/images/erad/s2.png',
-    'assets/images/erad/s3.png',
-    'assets/images/erad/s5.png',
-    'assets/images/erad/s6.png',
-    'assets/images/erad/s7.png',
-    'assets/images/erad/s8.png',
-    'assets/images/erad/s9.png',
-    'assets/images/erad/s10.png',
-    'assets/images/erad/s4.png',
-  ];
-  final List<Map<String, dynamic>> features = [
-  {
-    "icon": Icons.inventory_2, 
-    "title": "Advanced Product Management",
-    "description": "Easily add, edit, and apply discounts to your products with full control."
-  },
-  {
-    "icon": Icons.point_of_sale, 
-    "title": "Smart Invoice System",
-    "description": "Create and manage invoices like a pro! Scan barcodes or search by name for quick billing."
-  },
-  {
-    "icon": Icons.receipt_long, 
-    "title": "Invoice History & Returns",
-    "description": "Find past invoices easily, modify them, or process product returns effortlessly."
-  },
-  {
-    "icon": Icons.search, 
-    "title": "Fast Product Lookup",
-    "description": "Instantly find any product by barcode or name—no more manual searching!"
-  },
-  {
-    "icon": Icons.bar_chart, 
-    "title": "Profit Insights & Analytics",
-    "description": "Track daily and monthly profits with clear charts highlighting your best days."
-  },
-  {
-    "icon": Icons.shopping_cart, 
-    "title": "Sales Overview",
-    "description": "Monitor daily and monthly sales trends with interactive visual charts."
-  },
-  {
-    "icon": Icons.store, 
-    "title": "Store Dashboard",
-    "description": "View key business details: stock levels, product categories, and total inventory value."
-  },
-  {
-    "icon": Icons.person, 
-    "title": "Personalized Business Profile",
-    "description": "Customize your store’s name, logo, and essential business details effortlessly."
-  },
-];
+class page_two extends StatelessWidget {
+  page_two({super.key});
 
 
-  void _showJoke(BuildContext context) {
-  final jokes = [
-  "🚧 iOS version is still loading... Please wait... forever! 😆",
-  "🍏 iOS version is coming... Just like that message you left on ‘Seen’! 😂",
-  "⏳ Patience is key! iOS version is coming... one day... maybe! 🤣",
-  "🤖 We asked Siri about the iOS version... She said ‘Ask me later’! 😜",
-  "🚀 This button does not work today... and probably not tomorrow either! 😆",
-  "🏖️ This button is on vacation... indefinitely! 😂"
-  ];
+//=======================================================================================================functions
 
+  void _showMessage(BuildContext context) {         // هيبعت رسايل عشوائية في حالة مفيش ملف ios (والرسايل دي موجودة في ملف page_one_info)
 
-  final randomJoke = (jokes..shuffle()).first; // اختيار مزحة عشوائية
+  final randomMessage = (messages..shuffle()).first;
 
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
-        randomJoke,
+        randomMessage,
         textAlign: TextAlign.center,
         style: const TextStyle(fontSize: 16, color: Colors.white),
       ),
@@ -92,26 +31,28 @@ final ScrollController _scrollController = ScrollController();
       ),
     ),
   );
-}
-
-//=======================================================================================================functions
-  void _scrollToBottom() {
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent, // الانتقال لنهاية الصفحة
-      duration: const Duration(milliseconds: 500), // مدة الحركة
-      curve: Curves.easeInOut, // سلاسة التمرير
-    );
   }
 
   void _downloadApk() async {
-  final Uri url = Uri.parse("https://drive.google.com/uc?export=download&id=1dbqFxwHzDGMRHkL_C2DbzKP83q7jNzw8");
+    final Uri url = Uri.parse(appTwoURL);
 
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url, mode: LaunchMode.externalApplication);
-  } else {
-    throw "Could not launch $url";
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw "Could not launch $url";
+    }
   }
-}
+
+  void _IOS_downloadApk() async {
+    final Uri url = Uri.parse(IOS_appTwoURL!);
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw "Could not launch $url";
+    }
+  }
+
 //=======================================================================================================functions
 
 
@@ -120,7 +61,7 @@ final ScrollController _scrollController = ScrollController();
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text("إيراد"),
+        title: const Text(appTwoName),
         centerTitle: true,
       ),
       body: ListView(
@@ -132,24 +73,24 @@ final ScrollController _scrollController = ScrollController();
               leading: Transform.scale(
                 scale: 1.5,
                 child: Container(
-                  margin: EdgeInsets.only(right: 10),
+                  margin: const EdgeInsets.only(right: 10),
                   width: 60,   // MediaQuery.of(context).size.shortestSide * 0.15, // العرض
                   height: 60,  //MediaQuery.of(context).size.shortestSide * 0.15,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20), // تدوير الحواف
+                    borderRadius: BorderRadius.circular(20),
                     image: const DecorationImage(
-                      image: AssetImage("assets/images/frontlogo.jpg"), // استبدلها بمسار صورتك
-                      fit: BoxFit.cover, // لجعل الصورة تغطي الخلفية بالكامل
+                      image: AssetImage(appTwoLogo),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
-              title: const Text("إيراد", style: TextStyle( color: Colors.black, fontSize: 30 , fontWeight: FontWeight.w900),),
+              title: const Text(appTwoName, style: TextStyle( color: Colors.black, fontSize: 30 , fontWeight: FontWeight.w900),),
               subtitle: const Row(
                 children: [
                   Icon(Icons.cloud_download_outlined, color: Colors.black),
                   SizedBox(width: 5),
-                  Text("24 MB", style: TextStyle( color: Colors.black, fontSize: 15 , fontWeight: FontWeight.w900),),
+                  Text(appTwoSize, style: TextStyle( color: Colors.black, fontSize: 15 , fontWeight: FontWeight.w900),),
                 ],
               ),
             ),
@@ -170,7 +111,7 @@ final ScrollController _scrollController = ScrollController();
                     )),
                     shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // تدوير الحواف بالكامل
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),
@@ -196,11 +137,11 @@ final ScrollController _scrollController = ScrollController();
                       )), // عرض 200 وطول 60
                     shape: WidgetStatePropertyAll(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // تدوير الحواف بالكامل
+                        borderRadius: BorderRadius.circular(10),
                     ),),
                   ),
                   onPressed: () {
-                    _showJoke(context);
+                    IOS_appTwoURL == null ? _showMessage(context) : _IOS_downloadApk() ;
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -217,20 +158,17 @@ final ScrollController _scrollController = ScrollController();
           const SizedBox(height: 60),
           CarouselSlider(
             options: CarouselOptions(
-              height: 200, // ارتفاع السلايدر
-              enlargeCenterPage: true, // تكبير الصورة في المنتصف
-              autoPlay: true, // تشغيل تلقائي
-              autoPlayInterval: Duration(seconds: 3), // مدة الانتقال
-              viewportFraction: 0.3, // نسبة عرض الصورة في الشاشة
+              height: 200,
+              enlargeCenterPage: true,
+              autoPlay: true,
+              autoPlayInterval: Duration(seconds: 3),
+              viewportFraction: 0.3,
             ),
-            items: imagePaths.map((imagePath) {
+            items: appTwoImages.map((imagePath) {
               return Container(
                 margin: const EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  // boxShadow: const [
-                  //   BoxShadow(color: Colors.black26, blurRadius: 6, spreadRadius: 2),
-                  // ],
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
@@ -240,7 +178,7 @@ final ScrollController _scrollController = ScrollController();
             }).toList(),
           ),
         const SizedBox(height: 50),
-        const Text("What is Erad?", 
+        const Text("What is $appTwoName?", 
     style: TextStyle(
         color: Colors.black, 
         fontSize: 25, 
@@ -252,7 +190,7 @@ final ScrollController _scrollController = ScrollController();
 const Padding(
   padding: EdgeInsets.symmetric(horizontal: 10),
   child: Text(
-    "Erad is your smart cashier system, helping businesses track sales, manage inventory, and generate reports—all in one place. \nForget manual calculations and start automating your business today! 📊",
+    appTwoDescription,
     style: TextStyle(
         color: Colors.black, 
         fontSize: 15, 
@@ -262,7 +200,7 @@ const Padding(
   ),
 ),
 const SizedBox(height: 40),
-const Text("Erad’s Top Features", 
+const Text("$appTwoName’s Top Features", 
     style: TextStyle(
         color: Colors.black, 
         fontSize: 25, 
@@ -275,13 +213,13 @@ Padding(
   padding: const EdgeInsets.symmetric(horizontal: 20),
   child: Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: features.map((feature) {
+    children: appTwoFeatures.map((feature) {
       return Card(
-        color: Colors.black, // لون الكارت
+        color: Colors.black,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
-        elevation: 4, // ظل خفيف
+        elevation: 4,
         margin: const EdgeInsets.symmetric(vertical: 8),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -326,9 +264,8 @@ Padding(
 
       const SizedBox(height: 20),
       const Text("null", style: TextStyle( color: Colors.black, fontSize: 25 , fontWeight: FontWeight.w900, fontFamily: "eng"),textAlign: TextAlign.center,),
-      // const SizedBox(height: 10),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center, // توسيط العناصر
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
             icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.black, size: 20),
@@ -336,7 +273,7 @@ Padding(
               facebook();
             },
           ),
-          const SizedBox(width: 5), // مسافة بين الأيقونات
+          const SizedBox(width: 5),
           IconButton(
             icon: const FaIcon(FontAwesomeIcons.linkedin, color: Colors.black, size: 20),
             onPressed: () {
@@ -355,6 +292,13 @@ Padding(
             icon: const FaIcon(FontAwesomeIcons.solidEnvelope, color: Colors.black, size: 20),
             onPressed: () {
               email();
+            },
+          ),
+          const SizedBox(width: 5),
+          IconButton(
+            icon: const FaIcon(FontAwesomeIcons.globe, color: Colors.black, size: 20),
+            onPressed: () {
+              website();
             },
           ),
         ],
