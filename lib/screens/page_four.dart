@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:null_company/global/page_1_info.dart'; // appName, appImages, appLogo, appDescription, appFeatures, appURL, IOS_appURL
+import 'package:null_company/global/page_4_info.dart'; // appName, appImages, appLogo, appDescription, appFeatures, appURL, IOS_appURL
 import 'package:null_company/url_launcher.dart'; // facebook, linkedIn, youtube, email, website
 
-class PageOnePro extends StatefulWidget {
-  const PageOnePro({super.key});
+class PageFourPro extends StatefulWidget {
+  const PageFourPro({super.key});
 
   @override
-  State<PageOnePro> createState() => _PageOneProState();
+  State<PageFourPro> createState() => _PageFourProState();
 }
 
-class _PageOneProState extends State<PageOnePro> {
+class _PageFourProState extends State<PageFourPro> {
   final ScrollController _scrollController = ScrollController();
   int _carouselIndex = 0;
 
   void _downloadIOS() => _showSnack("iOS version coming soon");
 
   void _downloadAndroid() async {
-    final Uri url = Uri.parse(appURL);
+    final Uri url = Uri.parse(appFourURL);
 
     if (await canLaunchUrl(url)) {
       await launchUrl(url, mode: LaunchMode.externalApplication);
@@ -68,11 +68,11 @@ class _PageOneProState extends State<PageOnePro> {
                       CircleAvatar(
                         backgroundColor: Colors.black,
                         radius: isMobile ? 48 : 60,
-                        backgroundImage: const AssetImage(appLogo),
+                        backgroundImage: const AssetImage(appFourLogo),
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        appName,
+                        appFourName,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: isMobile ? 26 : 36,
@@ -81,7 +81,7 @@ class _PageOneProState extends State<PageOnePro> {
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        appSize,
+                        appFourSize,
                         style: TextStyle(
                           color: Colors.white70,
                           fontSize: isMobile ? 14 : 16,
@@ -143,7 +143,7 @@ class _PageOneProState extends State<PageOnePro> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        appDescription,
+                        appFourDescription,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.grey.shade700,
@@ -200,7 +200,7 @@ class _PageOneProState extends State<PageOnePro> {
                         return GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: appFeatures.length,
+                          itemCount: appFourFeatures.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: crossAxisCount,
@@ -209,7 +209,7 @@ class _PageOneProState extends State<PageOnePro> {
                             childAspectRatio: 3.2,
                           ),
                           itemBuilder: (context, index) {
-                            final f = appFeatures[index];
+                            final f = appFourFeatures[index];
                             return _featureTile(
                                 f["icon"], f["title"], f["description"], isMobile ,context);
                           },
@@ -263,7 +263,7 @@ class _PageOneProState extends State<PageOnePro> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        "© ${DateTime.now().year} $appName. All rights reserved.",
+                        "© ${DateTime.now().year} $appFourName. All rights reserved.",
                         style:
                             const TextStyle(color: Colors.white54, fontSize: 13),
                       ),
@@ -284,9 +284,9 @@ class _PageOneProState extends State<PageOnePro> {
     return Column(
       children: [
         CarouselSlider.builder(
-          itemCount: appImages.length,
+          itemCount: appFourImages.length,
           itemBuilder: (context, index, realIdx) {
-            final img = appImages[index];
+            final img = appFourImages[index];
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               decoration: BoxDecoration(
@@ -317,7 +317,7 @@ class _PageOneProState extends State<PageOnePro> {
         const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(appImages.length, (i) {
+          children: List.generate(appFourImages.length, (i) {
             final bool active = i == _carouselIndex;
             return AnimatedContainer(
               duration: const Duration(milliseconds: 300),

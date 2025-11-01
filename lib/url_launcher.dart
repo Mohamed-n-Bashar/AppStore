@@ -49,9 +49,9 @@ whatsapp()async{
   }
 }
 
-email()async{
+email({String email = "null.devs01@gmail.com"})async{
   try {
-    final Uri uri = Uri.parse("mailto:${"null.devs01@gmail.com"}");
+    final Uri uri = Uri.parse("mailto:$email");
     if(await canLaunchUrl(uri)){
       await launchUrl(uri);
     }

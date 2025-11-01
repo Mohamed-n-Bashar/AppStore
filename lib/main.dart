@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:null_company/screens/MyHomePage.dart';
+import 'package:null_company/screens/page_four.dart';
+import 'package:null_company/screens/page_three.dart';
 import 'package:null_company/screens/page_two.dart';
 import 'package:null_company/screens/page_one.dart';
 
@@ -15,9 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => MyHomePage(),
-        '/page_one': (context) => page_one(),
-        '/page_two': (context) => page_two(),
+        '/': (context) => const MyHomePage(),
+        '/page_one': (context) => const PageOnePro(),
+        '/page_two': (context) => const PageTwoPro(),
+        '/page_fitTrack': (context) => const PageFitTrack(),
+        '/page_rental': (context) => const PageFourPro(),
       },
 
       debugShowCheckedModeBanner: false,
@@ -29,6 +33,11 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 30),
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Colors.black,
+          selectionColor: Colors.grey,
+          selectionHandleColor: Colors.black,
         ),
       ),
       // home: MyHomePage(),
